@@ -1,0 +1,15 @@
+function! DisplayTabAlignment()
+    let c = virtcol('.')
+    let modulus = (c-1)%4
+    return modulus == 0 ? "[" . c . "/80]" : c . "/80 "
+endfunction
+
+augroup statusline
+    autocmd!
+    set laststatus=2
+    set statusline=%y
+    set statusline+=%f
+    set statusline+=%=
+    set statusline+=Column:%7{DisplayTabAlignment()}\ 
+    set statusline+=Line:\ %3l/%-3L
+augroup END
